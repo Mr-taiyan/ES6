@@ -20,3 +20,10 @@ console.log(start);
 console.log(start.line);
 console.log(start.column);
 // console.log(loc); // throw a error!!!
+
+let {loc: { end }, name} = node;
+
+console.log(end, name);
+
+({name} = node);
+console.log(name);
