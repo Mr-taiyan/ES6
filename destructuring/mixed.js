@@ -15,7 +15,7 @@ let node = {
 };
 
 // let {loc, loc: { start }, range: [ ,a]} = node;
-let {loc, loc: { start }, range: [ ,a], range: [b]} = node; // to check if the same property name can be writen into same destructuring
+let {loc, loc: { start }, range: [ ,a], range: [b]} = node; // to check if the same property name can be written into same destructuring
 
 console.log(loc);
 console.log(start);
