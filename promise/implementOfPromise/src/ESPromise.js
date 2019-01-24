@@ -6,7 +6,7 @@ const STATE = {
     rejected: 2
 };
 
-class Es6Promise {
+export class ESPromise {
     constructor(executor) {
         this._state = STATE.pending;
         this._value = undefined;
@@ -34,3 +34,4 @@ class Es6Promise {
 
     }
 }
+
