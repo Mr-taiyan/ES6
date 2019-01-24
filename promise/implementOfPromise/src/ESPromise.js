@@ -6,7 +6,7 @@ const STATE = {
     rejected: 2
 };
 
-export class ESPromise {
+class ESPromise {
     constructor(executor) {
         this._state = STATE.pending;
         this._value = undefined;
@@ -35,6 +35,7 @@ export class ESPromise {
     }
 
     then(onresolved, onrejected) {
+        let self = this;
 
         let promise1 = new ESPromise((resolve, reject) => {
             let scheduleFn = () => {
@@ -43,10 +44,11 @@ export class ESPromise {
                     onrejected = typeof onrejected === "function" ? onrejected : v => throws(v);
 
                     try {
-                        if (this._state === STATE.resolved) {
-                            resolve(onresolved(this._value));
+                        console.log(this === self);
+                        if (self._state === STATE.resolved) {
+                            resolve(onresolved(self._value));
                         } else {
-                            reject(onrejected(this._value));
+                            reject(onrejected(self._value));
                         }
                     } catch (e) {
                         reject(e);
@@ -66,5 +68,10 @@ export class ESPromise {
     }
 }
 
-new ESPromise().then();
+new ESPromise((resolve, reject) => {
+    resolve(1);
+}).then(value => {
+    console.log(value);
+});
+console.log('chen');
 
