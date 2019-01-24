@@ -33,5 +33,38 @@ export class ESPromise {
         }
 
     }
+
+    then(onresolved, onrejected) {
+
+        let promise1 = new ESPromise((resolve, reject) => {
+            let scheduleFn = () => {
+                setTimeout(() => {
+                    onresolved = typeof onresolved === "function" ? onresolved : v => v;
+                    onrejected = typeof onrejected === "function" ? onrejected : v => throws(v);
+
+                    try {
+                        if (this._state === STATE.resolved) {
+                            resolve(onresolved(this._value));
+                        } else {
+                            reject(onrejected(this._value));
+                        }
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            };
+
+            if (this._state === STATE.pending) {
+                this._callback.push(scheduleFn);
+            } else {
+                scheduleFn();
+            }
+        });
+
+
+        return promise1;
+    }
 }
+
+new ESPromise().then();
 
