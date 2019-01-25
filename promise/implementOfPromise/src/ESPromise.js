@@ -44,12 +44,13 @@ class ESPromise {
                     onrejected = typeof onrejected === "function" ? onrejected : v => throws(v);
 
                     try {
-                        console.log(this === self);
-                        if (self._state === STATE.resolved) {
-                            resolve(onresolved(self._value));
-                        } else {
-                            reject(onrejected(self._value));
-                        }
+                        // if (self._state === STATE.resolved) {
+                        //     resolve(onresolved(self._value));
+                        // } else {
+                        //     reject(onrejected(self._value));
+                        // }
+                        let x = self._state === STATE.resolved ? onresolved(self._value) : onrejected(self._value);
+                        resolveProcedure({resolve, reject, promise1 }, x);
                     } catch (e) {
                         reject(e);
                     }
@@ -68,10 +69,46 @@ class ESPromise {
     }
 }
 
-new ESPromise((resolve, reject) => {
+function resolveProcedure({resolve, reject, promise2}, x) {
+    if (promise2 === x) {
+        reject(new TypeError(x));
+    }
+
+    if (x instanceof ESPromise) {
+        x.then(value => resolveProcedure({resolve, reject, promise2}, value), reason => reject(reason));
+    } else if ((typeof x === 'object' && x !== null) || (typeof x === 'function')) {
+        let resolvedOrRejected = false;
+        try {
+            let then = x.then;
+            if (typeof then === 'function') {
+                then.call(x, value => {
+                    if (!resolvedOrRejected) {
+                        resolveProcedure({resolve, reject, promise2}, value);
+                        resolvedOrRejected = true;
+                    }
+                }, reason => {
+                    if (!resolvedOrRejected) {
+                        reject(reason);
+                        resolvedOrRejected = true;
+                    }
+                });
+            } else {
+                resolve(x);
+            }
+        } catch (e) {
+            if (!resolvedOrRejected) {
+                reject(e);
+            }
+        }
+    } else {
+        resolve(x);
+    }
+}
+
+let p1 = new ESPromise((resolve, reject) => {
     resolve(1);
 }).then(value => {
-    console.log(value);
-});
-console.log('chen');
-
+    return new ESPromise((resolve, reject) => {
+        setTimeout(() => resolve(value + 1), 1000);
+    });
+}).then(value => console.log(value));
