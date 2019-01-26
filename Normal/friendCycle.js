@@ -27,7 +27,7 @@ let event = {
             for (let index = 0; index < fns.length; index++) {
                 const _fn = fns[index];
                 if (_fn === fn) {
-                    fns.splice(index, 1):
+                    fns.splice(index, 1);
                 }
             }
         }
