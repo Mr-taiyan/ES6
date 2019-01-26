@@ -1,5 +1,5 @@
 let yourMsg = {};
-yourMsg.peopleList = [];
+yourMsg.peopleList = []; // store functions subscribed
 yourMsg.listener = function (fn) {
     yourMsg.peopleList.push(fn);
 };
