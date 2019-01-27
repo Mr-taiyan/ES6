@@ -105,10 +105,18 @@ function resolveProcedure({resolve, reject, promise2}, x) {
     }
 }
 
-let p1 = new ESPromise((resolve, reject) => {
+// let p1 = new ESPromise((resolve, reject) => {
+//     resolve(1);
+// }).then(value => {
+//     return new ESPromise((resolve, reject) => {
+//         setTimeout(() => resolve(value + 1), 1000);
+//     });
+// }).then(value => console.log(value));
+
+let p1 = new ESPromise(resolve => {
     resolve(1);
 }).then(value => {
-    return new ESPromise((resolve, reject) => {
-        setTimeout(() => resolve(value + 1), 1000);
-    });
-}).then(value => console.log(value));
+    console.log(1);
+}).then(value => {
+    console.log('ceshi');
+});
