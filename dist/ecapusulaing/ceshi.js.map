@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../ecapusulaing/ceshi.js"],"names":[],"mappings":";;AAAA","file":"ceshi.js","sourcesContent":["import \"./first.js\";"]}
+{"version":3,"sources":["../../ecapusulaing/ceshi.js"],"names":["console","log","color","Ceshi","sayName"],"mappings":";;AAAA;;AAEAA,QAAQC,GAAR,CAAYC,YAAZ;;AAEA,IAAIC,YAAJ,CAAU,MAAV,EAAkBC,OAAlB","file":"ceshi.js","sourcesContent":["import {color, Ceshi} from \"./first\";\n\nconsole.log(color);\n\nnew Ceshi('chen').sayName();"]}

@@ -1,4 +1,8 @@
 "use strict";
 
-require("./first.js");
+var _first = require("./first");
+
+console.log(_first.color);
+
+new _first.Ceshi('chen').sayName();
 //# sourceMappingURL=ceshi.js.map
