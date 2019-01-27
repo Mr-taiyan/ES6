@@ -50,7 +50,7 @@ class ESPromise {
                         //     reject(onrejected(self._value));
                         // }
                         let x = self._state === STATE.resolved ? onresolved(self._value) : onrejected(self._value);
-                        resolveProcedure({resolve, reject, promise1 }, x);
+                        resolveProcedure({resolve, reject, promise2: promise1 }, x);
                     } catch (e) {
                         reject(e);
                     }
