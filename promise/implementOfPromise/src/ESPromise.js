@@ -6,7 +6,7 @@ const STATE = {
     rejected: 2
 };
 
-class ESPromise {
+export class ESPromise {
     constructor(executor) {
         this._state = STATE.pending;
         this._value = undefined;
@@ -113,10 +113,10 @@ function resolveProcedure({resolve, reject, promise2}, x) {
 //     });
 // }).then(value => console.log(value));
 
-let p1 = new ESPromise(resolve => {
-    resolve(1);
-}).then(value => {
-    console.log(1);
-}).then(value => {
-    console.log('ceshi');
-});
+// let p1 = new ESPromise(resolve => {
+//     resolve(1);
+// }).then(value => {
+//     console.log(1);
+// }).then(value => {
+//     console.log('ceshi');
+// });
