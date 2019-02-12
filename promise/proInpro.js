@@ -14,6 +14,8 @@ promise.then(content => {
     promise.then(content => {
         console.log(content + 'com')
     });
+
+    console.log('splite');
 });
 
 setTimeout(() => {
