@@ -67,6 +67,14 @@ export class ESPromise {
 
         return promise1;
     }
+
+    static resolve(value) {
+        return new ESPromise((resolve, reject) => resolveProcedure({resolve, reject: resolve}, value));
+    }
+
+    static reject(reason) {
+        return new ESPromise((resolve, reject) => resolveProcedure({resolve: reject, reject}, reason));
+    }
 }
 
 function resolveProcedure({resolve, reject, promise2}, x) {
