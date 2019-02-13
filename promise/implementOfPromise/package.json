@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@whinc/es6-promise": "^0.1.1",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0"
   }
